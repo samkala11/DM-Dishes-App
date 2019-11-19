@@ -1,0 +1,41 @@
+/* .back-image{
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    z-index: -10;
+} */
+
+.Modal {
+	background-color: rgb(84, 154, 211);
+    border-radius: 2px;
+    padding: 20px;
+    width: 300px;
+    height: 361px;
+    margin-left: 38%;
+    display: flex;
+    justify-content: center;
+}
+
+input{
+    outline: none;
+		border: 0.5;
+		background: transparent;
+		flex: 1 0 auto;
+		font-size: 14px;
+        font-weight: 300;
+	    padding-bottom: 3px;
+	    margin-bottom: 5px;
+}
+
+::placeholder {
+		color: rgb(204, 199, 199);
+		opacity: 1; /* Firefox */
+  }
+  
+  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color: red;
+  }
+  
+  ::-ms-input-placeholder { /* Microsoft Edge */
+   color: red;
+  }
