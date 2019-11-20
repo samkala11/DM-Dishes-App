@@ -5,7 +5,7 @@ import NavBarContainer from './navbar/navbar_container';
 import './app.css';
 import LoginFormContainer from './session/login_form_container';
 import SignupFormContainer from './session/signup_form_container';
-import HomePageContainer from './home/home_container';
+import profilePageContainer from './profile/profile_container';
 
 const App = () => (
   <div>
@@ -13,7 +13,7 @@ const App = () => (
     <Switch>
         <AuthRoute exact path="/" component={LoginFormContainer} />
         <AuthRoute exact path="/signup" component={SignupFormContainer} />
-        <ProtectedRoute exact path="/home" component={HomePageContainer} />
+        <ProtectedRoute exact path="/profile" component={profilePageContainer} />
     </Switch>
   </div>
 );

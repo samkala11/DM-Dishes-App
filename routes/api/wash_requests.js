@@ -55,7 +55,7 @@ router.post('/',
 
 
 router.put('/:request_id', 
-// passport.authenticate('jwt', { session: false }),
+passport.authenticate('jwt', { session: false }),
 (req, res) => {
     Request.findByIdAndUpdate(req.params.request_id, {
         $set: {'dishesToClean.utensilsCupsAndGlasses': req.body.utensils,

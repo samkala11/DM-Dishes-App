@@ -1,6 +1,32 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+
+var locationInfoSchema = new Schema({
+  _id: false,
+  city: {
+    type: String,
+    default: ""
+  },
+  state: {
+    type: String,
+    default: ""
+  },
+  country: {
+    type: String,
+    default: ""
+  },
+  long: {
+    type: Number,
+    default: 0
+  },
+  lat: {
+    type: Number,
+    default: 0
+  }
+});
+
+
 const UserSchema = new Schema({
     name: {
       type: String,
@@ -34,6 +60,7 @@ const UserSchema = new Schema({
       default: 0,
       required: true
     },
+    locationInfo: {type: locationInfoSchema, default: () => ({})},
     completedCustomerRequests: {
       type: Number,
       default: 0,

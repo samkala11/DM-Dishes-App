@@ -9,11 +9,14 @@
     "frontend-install": "npm install --prefix frontend",
     "frontend": "npm start --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run frontend\""
-
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "nodemon": "^1.19.4"
+  },
+  "dependencies": {
+    "axios-https-proxy-fix": "^0.17.1",
+    "google-maps-react": "^2.0.2"
   }
 }

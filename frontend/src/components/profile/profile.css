@@ -1,0 +1,10 @@
+.dp-photo{
+    width: 150px;
+    height: 150px;
+    border-radius: 300px;
+    background-color: rebeccapurple;
+}
+
+.hidden{
+    display: none;
+}

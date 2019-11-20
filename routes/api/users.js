@@ -85,7 +85,8 @@ router.post('/login', (req, res) => {
                     timeStamp: user.timeStamp,
                     bio: user.bio,
                     positiveReviews: user.positiveReviews,
-                    negativeReviews: user.negativeReviews
+                    negativeReviews: user.negativeReviews,
+                    locationInfo: user.locationInfo
                 };
           
                 jwt.sign(
@@ -108,7 +109,10 @@ router.post('/login', (req, res) => {
                       timeStamp: user.timeStamp,
                       bio: user.bio,
                       positiveReviews: user.positiveReviews,
-                      negativeReviews: user.negativeReviews
+                      negativeReviews: user.negativeReviews,
+                      locationInfo: user.locationInfo,
+                      lastSignIn: Date.now()
+
                     });
                   });
               } else {
@@ -119,23 +123,79 @@ router.post('/login', (req, res) => {
 })
 
 
-router.get('/current', passport.authenticate('jwt', {session: false}), (req, res) => {
-    res.json({
-      id: req.user.id,
-      name: req.user.name,
-      email: req.user.email
-    });
+router.get('/current', 
+passport.authenticate('jwt', {session: false}), 
+(req, res) => {
+  User.findById(req.user.id)
+    .then(user => { 
+        console.log(user)
+        res.data.json(user) } )
+    .catch(err =>
+        res.status(404).json({ noUserFound: 'There are no users with that ID' }))        
 })
 
 
-router.get('/userInfo', passport.authenticate('jwt', { session: false }), (req, res) => { 
+// userinfp bu user id param
+router.get('/userInfo/:user_id', 
+passport.authenticate('jwt', { session: false }), 
+(req, res) => { 
     // console.log(req.user)    
-    User.findById(req.user.id)
+    User.findById(req.params.user_id)
             .then(user => { console.log(user)
                 res.json(user) } )
             .catch(err =>
                 res.status(404).json({ noUserFound: 'There are no users with that ID' }))        
 }) 
 
+
+// Update Washer name and bio
+router.put('/updateInfo/:user_id', 
+passport.authenticate('jwt', { session: false }),
+(req, res) => {
+    User.findByIdAndUpdate(req.params.user_id, {
+        $set: {'name': req.body.name,
+                'bio': req.body.bio },
+    })
+    .then(user => {
+        console.log(user)
+        res.json({result: user })
+    })
+
+})
+
+
+
+// Update Address
+router.put('/updateAddress/:user_id', 
+// passport.authenticate('jwt', { session: false }),
+(req, res) => {
+    User.findByIdAndUpdate(req.params.user_id, {
+        $set: {'locationInfo.city': req.body.city,
+        'locationInfo.state': req.body.state,
+        'locationInfo.country': req.body.country, },
+    })
+    .then(user => {
+        console.log(user)
+        res.json({result: user })
+    })
+
+})
+
+
+// Update Location Long Lat
+router.put('/updateLocation/:user_id', 
+// passport.authenticate('jwt', { session: false }),
+(req, res) => {
+    User.findByIdAndUpdate(req.params.user_id, {
+        $set: {'locationInfo.long': req.body.long,
+        'locationInfo.lat': req.body.lat,
+       },
+    })
+    .then(user => {
+        console.log(user)
+        res.json({result: user })
+    })
+
+})
 
 module.exports = router;
