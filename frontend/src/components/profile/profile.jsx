@@ -146,36 +146,38 @@ class Profile extends React.Component {
         const {user} = this.state;
         window.profileState = this.state;
 
-        if (this.props.user.washerFlag) {
+        // if (this.props.user.washerFlag) {
             // Washer Employee Profile
             return(
             <div className="profile-page">
-                <h3> Welcome {this.state.name}!  </h3>
-                <h2> Finish your bio and start with your first job </h2>
+                <h2> Welcome {this.state.name}!  </h2>
+                {this.props.user.washerFlag && <h3> Finish your bio and start with your first job </h3>}
+                {this.props.user.customerFlag &&   <h3> Welcome {this.state.name} Let's get your dishes done </h3> }
                 <div className="dp-photo"> </div>
                 <br/>
                 <span> <button> Upload photo</button></span>
                 {/* <p>  {user.timeStamp.slice(0,10)}</p> */}
                 <p> Email address: {this.state.email}</p>
 
-                <form  onSubmit={this.handleSubmitEmployee}> 
-                    <span> Name: </span> <input type="text" 
+                <form className="update-name-form" onSubmit={this.handleSubmitEmployee}> 
+                    <span> Name:  <input type="text" 
                                     value={this.state.name}
                                     onChange={this.update('name')}/> 
-                    
-
+                    </span>
                     <br/>
-                    <span>Bio: </span> <textarea
+
+                    {this.props.user.washerFlag && <span>Bio:  <textarea
                                         rows="17" cols="60"
                                         value={this.state.bio}
                                         onChange={this.update('bio')}
                                         />
+                    </span> }
                     <br/>
+                    
                     <input className="save-1" type="submit" value="Save Changes"/>
-
-
-                   
                 </form>
+
+                
                 <p className="change-confirmed hidden"> Changes successfully changed!</p>
 
 
@@ -200,42 +202,15 @@ class Profile extends React.Component {
                 </div>
                 <p className="address-confirmed hidden"> Address successfully changed!</p>
 
-            </div>
-            )
-        } else if (this.props.user.customerFlag) {
-            // Customer Profile
-            return(
-                <div className="profile-page">
-                <h4> Welcome {this.state.name} Let's get your dishes done </h4>
-                {/* <p> date joined: {user.timeStamp.slice(0,10)}< /p> */}
-                <div className="dp-photo"> </div>
-                <br/>
-                <span> <button> Upload photo</button></span>
 
-                <p> Email address: {this.state.email}</p> 
-
-                <form onSubmit={this.handleSubmitCustomer}> 
-                    <span> Name: </span> <input type="text" 
-                                    value={this.state.name}
-                                    onChange={this.update('name')}/> 
-                    <br/>
-                    <input className="save-2" type="submit" value="Save Changes"/>
-                </form>
-
-                <button onClick={this.getCurrentLocation} className="confirm-loc"> Get Current Location </button>
-
-               
-                <p className="change-confirmed hidden"> Changes successfully changed!</p>
-
-                <div className="request-button">
-                    {/* <p> Request a job</p> */}
+                    {/* will show only for Customer */}
+                { this.props.user.customerFlag && <div className="request-button">
                     <button> Request a job </button>
-                </div>
+                </div>}
 
+            </div>
+        )
 
-             </div>
-                )
-        }
     }
 }
 
