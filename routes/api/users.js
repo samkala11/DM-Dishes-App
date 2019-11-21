@@ -86,7 +86,8 @@ router.post('/login', (req, res) => {
                     bio: user.bio,
                     positiveReviews: user.positiveReviews,
                     negativeReviews: user.negativeReviews,
-                    locationInfo: user.locationInfo
+                    locationInfo: user.locationInfo,
+                    
                 };
           
                 jwt.sign(
@@ -135,6 +136,39 @@ passport.authenticate('jwt', {session: false}),
 })
 
 
+// All washers in your city
+router.get('/all-washers/by-city', 
+// passport.authenticate('jwt', {session: false}), 
+(req, res) => {
+  User.find({washerFlag: true, 
+    // 'locationInfo.city': req.user.id
+  }) 
+    .then(user => { 
+        console.log(user)
+        res.json(user) } )
+    .catch(err =>
+        res.status(404).json({ noUserFound: 'There are no users' }))        
+})
+
+
+// All washers by your zone
+router.get('/all-washers/by-zone', 
+// passport.authenticate('jwt', {session: false}), 
+(req, res) => {
+  User.find({washerFlag: true, 
+    'zoneNumber': req.body.zoneNumber
+  }) 
+    .then(user => { 
+        console.log(user)
+        res.json(user) } )
+    .catch(err =>
+        res.status(404).json({ noUserFound: 'There are no users' }))        
+})
+
+
+
+
+
 // userinfp bu user id param
 router.get('/userInfo/:user_id', 
 passport.authenticate('jwt', { session: false }), 
@@ -173,6 +207,22 @@ router.put('/updateAddress/:user_id',
         $set: {'locationInfo.city': req.body.city,
         'locationInfo.state': req.body.state,
         'locationInfo.country': req.body.country, },
+    })
+    .then(user => {
+        console.log(user)
+        res.json({result: user })
+    })
+
+})
+
+// Set user zone
+router.put('/setZone/:user_id', 
+// passport.authenticate('jwt', { session: false }),
+(req, res) => {
+    User.findByIdAndUpdate(req.params.user_id, {
+        $set: {'zoneNumber': req.body.zoneNumber,
+        'zoneDescription': req.body.zoneDescription,
+        },
     })
     .then(user => {
         console.log(user)

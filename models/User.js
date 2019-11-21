@@ -84,6 +84,14 @@ const UserSchema = new Schema({
     timeStamp: {
       type: Date,
       default: Date.now
+    },
+    zoneNumber: {
+      type: Number,
+      default: 0
+    },
+    zoneDescription: {
+      type: String,
+      default: ''
     }
 })
 

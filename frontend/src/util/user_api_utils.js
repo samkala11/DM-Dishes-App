@@ -25,6 +25,13 @@ export const updateLocationLongLat = (userId, locationInfo) => {
     return axios.put(`api/users/updateLocation/${userId}`, locationInfo)
 }
 
+export const setZone = (userId, zoneInfo) => {
+    return axios.put(`api/users/setZone/${userId}`, zoneInfo)
+}
+
+export const getWashersByZone = (zoneNumber) => {
+    return axios.get('api/users/all-washers/by-zone', {zoneNumber})
+}
 const proxy =  {
     host: '127.0.0.1',
     port: 9000,
