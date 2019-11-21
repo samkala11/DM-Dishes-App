@@ -10,7 +10,7 @@ export const RECEIVE_LOCATION_ERRORS = 'RECEIVE_LOCATION_ERRORS';
 export const receiveCityName = cityName => ({
     type: RECEIVE_CITY_NAME,
     cityName
-});
+}); 
 
 export const getCityNameThunk = (lat, long) => dispatch => (
     getCityName(lat, long).then((cityName) => ( dispatch(receiveCityName(cityName))

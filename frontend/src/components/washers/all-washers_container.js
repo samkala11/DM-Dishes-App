@@ -6,7 +6,8 @@ import { getUserInfoId } from '../../actions/user_actions'
 const mapStateToProps = (state) => {
     return{
         user: state.session.user,
-        currentUser: state.entities.currentUserInfo
+        currentUser: state.entities.currentUserInfo.userInfo,
+        allWashers: state.entities.allWashers.allWashers
     }
 }
 

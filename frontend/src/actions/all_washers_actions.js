@@ -8,15 +8,16 @@ export const receiveWashersByZone = washers => ({
     washers
 })
 
-export const getWashersByZoneThunk = (zoneNumber) => (dispatch) => {
-    getWashersByZone(zoneNumber).then(washers => ( dispatch(receiveWashersByZone(washers))
-    ), err => (
-        dispatch(receiveErrors(err)) 
-    )
-     )
-}
+export const getWashersByZoneThunk = (zoneNumber) => dispatch => (
+    getWashersByZone(zoneNumber).then((washers) => { 
+        // debugger; 
+        return ( dispatch(receiveWashersByZone(washers))
+    )}, err => (
+        dispatch(receiveWashersErrors(err.response.data)) 
+    ))
+);
 
-export const receiveErrors = errors => ({
+export const receiveWashersErrors = errors => ({
     type: RECEIVE_GET_WASHERS_ERRORS,
     errors
 });

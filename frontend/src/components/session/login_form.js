@@ -1,6 +1,7 @@
 import React from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import back2 from '../back3.jpg'
+import kitchen from './splash.jpg'
 import './login.css'
 class LoginForm extends React.Component {
   constructor(props) {
@@ -60,31 +61,33 @@ class LoginForm extends React.Component {
 
   render() {
     return (
-      <div>
-      {/* <img className="back-image" src={back2}/> */}
-        <form 
-        className="Modal"
-        onSubmit={this.handleSubmit}>
-          <div>
-            <h2> Sign In </h2>
-              <input type="text"
-                value={this.state.email}
-                onChange={this.update('email')}
-                placeholder="Email"
-              />
-            <br/>
-              <input type="password"
-                value={this.state.password}
-                onChange={this.update('password')}
-                placeholder="Password"
-              />
-            <br/>
-            <input type="submit" value="Login" />
+      <div className="login-splash-page">
+        <img className="kitchen"  src={kitchen}/>
+        <div className="form-cont">
+          <form 
+          className="Modal"
+          onSubmit={this.handleSubmit}>
+            <div className="form-inputs">
+              {/* <h2> Sign In </h2> */}
+                <input type="text"
+                  value={this.state.email}
+                  onChange={this.update('email')}
+                  placeholder="Email"
+                />
+              <br/>
+                <input type="password"
+                  value={this.state.password}
+                  onChange={this.update('password')}
+                  placeholder="Password"
+                />
+              <br/>
+              <input id="submit" type="submit" value="Login" />
 
-            <span>Or</span> <Link to="/signup"> Signup </Link>
-            {this.renderErrors()}
-          </div>
-        </form>
+              {this.renderErrors()}
+            </div>
+          </form>
+              <span>Or</span> <Link to="/signup"> Signup </Link>
+        </div>
       </div>
     );
   }

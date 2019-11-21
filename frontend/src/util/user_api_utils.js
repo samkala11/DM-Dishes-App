@@ -30,8 +30,10 @@ export const setZone = (userId, zoneInfo) => {
 }
 
 export const getWashersByZone = (zoneNumber) => {
-    return axios.get('api/users/all-washers/by-zone', {zoneNumber})
+    console.log(zoneNumber);
+    return axios.get(`/api/users/all-washers/by-zone/${zoneNumber}`)
 }
+
 const proxy =  {
     host: '127.0.0.1',
     port: 9000,

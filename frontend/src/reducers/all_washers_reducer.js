@@ -4,7 +4,7 @@ export default function( state ={}, action ){
     switch (action.type) {
         case RECEIVE_WASHERS_ZONE:
          return {
-            allWashers: action.washers
+            allWashers: action.washers.data
          };
         default:
          return state;

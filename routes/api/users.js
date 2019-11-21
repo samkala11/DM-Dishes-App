@@ -141,7 +141,7 @@ router.get('/all-washers/by-city',
 // passport.authenticate('jwt', {session: false}), 
 (req, res) => {
   User.find({washerFlag: true, 
-    // 'locationInfo.city': req.user.id
+    'locationInfo.city': req.user.city
   }) 
     .then(user => { 
         console.log(user)
@@ -152,11 +152,11 @@ router.get('/all-washers/by-city',
 
 
 // All washers by your zone
-router.get('/all-washers/by-zone', 
+router.get('/all-washers/by-zone/:zoneNumber', 
 // passport.authenticate('jwt', {session: false}), 
 (req, res) => {
   User.find({washerFlag: true, 
-    'zoneNumber': req.body.zoneNumber
+    'zoneNumber': req.params.zoneNumber
   }) 
     .then(user => { 
         console.log(user)
